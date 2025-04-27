@@ -1,0 +1,25 @@
+[user]
+	name = Jerome
+	email = {{ .email | quote }}
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	us = reset HEAD
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[color "branch"]
+	current = cyan
+	local = yellow
+	remote = green
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+[color "diff"]
+	meta = blue
+[core]
+	editor = vim
+[push]
+	default = simple

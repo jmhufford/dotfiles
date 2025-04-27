@@ -1,0 +1,1 @@
+`which chromium 2>/dev/null || which chrome 2>/dev/null || which google-chrome` --app="https://kvm.xemplify.net/"

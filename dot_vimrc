@@ -1,0 +1,112 @@
+"color scheme
+colo elflord
+"turn on syntax
+syntax on
+filetype on
+
+"mapping ESC to kj
+inoremap kj <Esc>
+cnoremap kj <C-C>
+"show white space characters
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+set smarttab
+set autoindent
+set clipboard=unnamedplus
+set nocompatible
+set smartcase
+set autochdir
+set splitbelow splitright
+set wildmode=longest,list,full
+
+" from nvim
+"setup line numbers and rel numbers
+set nu
+set relativenumber
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+set smartindent
+
+set nowrap
+
+set noswapfile
+set nobackup
+let &undodir = $HOME . "/.vim/undodir"
+set undofile
+
+set nohlsearch
+set incsearch
+
+set termguicolors
+
+set scrolloff=8
+set signcolumn=yes
+set isfname+=@-@
+
+set updatetime=50
+
+set colorcolumn=80
+
+let mapleader = " "
+
+" Quick way to get to netrw
+nnoremap <leader>wp :Ex<CR>
+
+" Move highlighted lines up and down with K and J
+xnoremap J :m '>+1<CR>gv=gv
+xnoremap K :m '<-2<CR>gv=gv
+
+" Keep cursor in place when using J
+nnoremap J mzJ`z
+
+" Keep cursor in middle when using d and u
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Keep search terms in the middle
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Paste over current line
+xnoremap <leader>p "_dP
+
+" Copy into system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+
+" Delete without copying
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" Alt way to exit insert mode
+inoremap <C-c> <Esc>
+
+" Q gross
+nnoremap Q <nop>
+
+" Tmux
+nnoremap <C-f> :silent !tmux neww tmux-sessionizer<CR>
+
+" Format
+nnoremap <leader>f :call lsp#buf#format()<CR>
+
+" Quick fix navigation
+nnoremap <C-k> :cnext<CR>zz
+nnoremap <C-j> :cprev<CR>zz
+nnoremap <leader>k :lnext<CR>zz
+nnoremap <leader>j :lprev<CR>zz
+
+" Refactor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" Make file executable
+nnoremap <leader>x :!chmod +x %<CR>
+
+" Source Vim config
+nnoremap <leader><leader> :so $MYVIMRC<CR>

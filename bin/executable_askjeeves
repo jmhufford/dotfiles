@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [ "$#" -eq 1 ]; then
+  grep -HRniI --color $1
+fi
+if [ "$#" -eq 2 ]; then
+  grep -HRniI --color $1 $2
+fi
