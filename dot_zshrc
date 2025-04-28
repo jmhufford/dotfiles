@@ -102,6 +102,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.env ]; then
+    . ~/.env
+fi
+
 export PATH=~/bin:$PATH
 export PATH=~/.cargo/bin:$PATH
 
@@ -113,4 +117,10 @@ export NVM_DIR="$HOME/.nvm"
 bindkey -s ^f "tmux-sessionizer\n"
 
 ### RANDOM COLOR SCRIPT ###
-colorscript random
+# Check if 'colorscript' exists, run it if available
+if command -v colorscript &> /dev/null; then
+  colorscript random
+# If 'colorscript' doesn't exist, check for 'fast fetch' and run it if available
+elif command -v fastfetch &> /dev/null; then
+  fastfetch
+fi
