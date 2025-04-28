@@ -1,0 +1,11 @@
+# Common Setup for bash and zsh
+[[ -f "$HOME/.bash_aliases" ]] && . "$HOME/.bash_aliases"
+[[ -f "$HOME/.env" ]] && . "$HOME/.env"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# Check if NVM_DIR is already set, if not, set it to a default value
+[[ -z "$NVM_DIR" ]] && export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
