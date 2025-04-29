@@ -2,7 +2,11 @@
 
 [data]
   email = {{ $email | quote }}
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+  font = "Ubuntu Mono"
+{{- else }}
   font = "SauceCodePro Nerd Font Mono"
+{{- end }}
 
 [edit]
   command = "vim"
