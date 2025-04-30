@@ -6,7 +6,7 @@ sudo apt update
 sudo apt install -y jq curl
 
 arch="amd64"
-{{- if eq .chezmoi.osArch "arm64" -}}
+{{- if eq .chezmoi.arch "arm64" -}}
 arch="arm64"
 {{- end -}}
 
