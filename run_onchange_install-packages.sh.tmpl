@@ -11,18 +11,35 @@ arch="amd64"
 arch="arm64"
 {{ end }}
 
+# helper: fetch the browser_download_url for the linux_<arch>.deb asset
+get_deb_url() {
+  repo="$1"    # e.g. shopify/ejson
+  curl -sSL "https://api.github.com/repos/${repo}/releases/latest" \
+    | jq -r \
+      --arg arch "${arch}" \
+      '.assets[]
+       | select(.name | test("linux_" + $arch + "\\.deb$"))
+       | .browser_download_url' \
+    | head -1
+}
+
 download_and_install() {
-  repo="$1"
-  name="$2"
+  repo="$1"    # e.g. shopify/ejson
+  url="$(get_deb_url "${repo}")"
+  if [ -z "$url" ]; then
+    echo "ERROR: could not find .deb asset for ${repo} (${arch})" >&2
+    return 1
+  fi
+
   tmp="$(mktemp --suffix=.deb)"
-  url="https://github.com/${repo}/releases/latest/download/${name}_latest_linux_${arch}.deb"
+  echo "Downloading $url…" >&2
   curl -sSL "$url" -o "$tmp"
   sudo dpkg -i "$tmp" || sudo apt-get install -f -y
   rm -f "$tmp"
 }
 
-download_and_install shopify/ejson     ejson
-download_and_install shopify/ejson2env  ejson2env
+download_and_install shopify/ejson
+download_and_install shopify/ejson2env
 
 {{ else if eq .chezmoi.os "darwin" }}
 
