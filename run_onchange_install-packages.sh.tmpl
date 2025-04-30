@@ -10,7 +10,7 @@ arch="amd64"
 arch="arm64"
 {{- end -}}
 
-download_and_install() {
+download_and_install(){
   repo="$1"
   name="$2"
   tmp="$(mktemp --suffix=.deb)"
