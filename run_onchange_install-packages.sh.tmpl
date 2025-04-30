@@ -1,16 +1,17 @@
-{{- if eq .chezmoi.osRelease.idLike "debian" -}}
 #!/usr/bin/env bash
 set -eu
+
+{{ if eq .chezmoi.osRelease.idLike "debian" }}
 
 sudo apt update
 sudo apt install -y jq curl
 
 arch="amd64"
-{{- if eq .chezmoi.arch "arm64" -}}
+{{ if eq .chezmoi.arch "arm64" }}
 arch="arm64"
-{{- end -}}
+{{ end }}
 
-download_and_install(){
+download_and_install() {
   repo="$1"
   name="$2"
   tmp="$(mktemp --suffix=.deb)"
@@ -20,14 +21,12 @@ download_and_install(){
   rm -f "$tmp"
 }
 
-download_and_install shopify/ejson    ejson
-download_and_install shopify/ejson2env ejson2env
+download_and_install shopify/ejson     ejson
+download_and_install shopify/ejson2env  ejson2env
 
-{{- else if eq .chezmoi.os "darwin" -}}
-#!/usr/bin/env bash
-set -eu
+{{ else if eq .chezmoi.os "darwin" }}
 
 brew install jq ejson ejson2env
 
-{{- end -}}
+{{ end }}
 
