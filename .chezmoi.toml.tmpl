@@ -1,12 +1,31 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $codespaces:= env "CODESPACES" | not | not -}}
+{{- $work:= true -}}
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+{{- $ejsonkey := env "EJSON_KEY" -}}
+{{- if eq $ejsonkey "" -}}
+{{- fail "required env var EJSON_KEY is not set" -}}
+{{- end -}}
+
+{{- if eq .chezmoi.hostname "nixos" }}  
+{{- $work = false -}}
+{{ else if eq .chezmoi.os "darwin" -}}
+{{- $work = false -}}
+{{- end }}
 
 [data]
-  email = {{ $email | quote }}
+  codespaces = {{ $codespaces }}
+  work = {{ $work }}
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
   font = "Ubuntu Mono"
 {{- else }}
   font = "SauceCodePro Nerd Font Mono"
 {{- end }}
+  ejson = {{ joinPath .chezmoi.sourceDir "chezmoi.ejson" | quote }}
 
 [edit]
   command = "vim"
+
+[ejson]
+  key = {{- quote $ejsonkey }}
+

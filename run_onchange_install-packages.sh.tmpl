@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.osRelease.idLike "debian" -}}
+#!/usr/bin/env sh
+set -eu
+
+sudo apt update
+sudo apt install -y jq curl
+
+arch="amd64"
+{{- if eq .chezmoi.osArch "arm64" -}}
+arch="arm64"
+{{- end -}}
+
+download_and_install() {
+  repo="$1"
+  name="$2"
+  tmp="$(mktemp --suffix=.deb)"
+  url="https://github.com/${repo}/releases/latest/download/${name}_latest_linux_${arch}.deb"
+  curl -sSL "$url" -o "$tmp"
+  sudo dpkg -i "$tmp" || sudo apt-get install -f -y
+  rm -f "$tmp"
+}
+
+download_and_install shopify/ejson    ejson
+download_and_install shopify/ejson2env ejson2env
+
+{{- else if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env sh
+set -eu
+
+brew install jq ejson ejson2env
+
+{{- end -}}
+

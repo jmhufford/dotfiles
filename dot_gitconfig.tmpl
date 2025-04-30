@@ -1,25 +1,35 @@
 [user]
-	name = Jerome
-	email = {{ .email | quote }}
+{{- $secrets := ejsonDecrypt .ejson -}}
+{{- if .work }}
+    name = Jerome Hufford
+    email = {{ quote $secrets.work_email_gov }}
+{{- else }}
+    name = Jerome
+    email = {{ quote $secrets.email }}
+{{- end }}
 
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
-	us = reset HEAD
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    us = reset HEAD
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [color "branch"]
-	current = cyan
-	local = yellow
-	remote = green
+    current = cyan
+    local = yellow
+    remote = green
 [color "status"]
-	added = green
-	changed = yellow
-	untracked = cyan
+    added = green
+    changed = yellow
+    untracked = cyan
 [color "diff"]
-	meta = blue
+    meta = blue
 [core]
-	editor = vim
+    editor = vim
 [push]
-	default = simple
+    default = simple
+{{- if .work }}
+[http "{{- $secrets.work_endpoint }}"]
+    extraheader = AUTHORIZATION: Basic {{- $secrets.work_key }}
+{{- end }}
