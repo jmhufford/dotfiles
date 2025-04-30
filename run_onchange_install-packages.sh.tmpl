@@ -1,5 +1,5 @@
 {{- if eq .chezmoi.osRelease.idLike "debian" -}}
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -eu
 
 sudo apt update
@@ -24,7 +24,7 @@ download_and_install shopify/ejson    ejson
 download_and_install shopify/ejson2env ejson2env
 
 {{- else if eq .chezmoi.os "darwin" -}}
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -eu
 
 brew install jq ejson ejson2env
