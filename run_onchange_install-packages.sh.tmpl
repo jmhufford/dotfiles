@@ -3,8 +3,8 @@ set -eu
 
 {{ if eq .chezmoi.osRelease.idLike "debian" }}
 
-sudo apt update
-sudo apt install -y jq curl
+sudo apt update -qq
+sudo DEBIAN_FRONTEND=noninteractive apt install -y -qq jq curl
 
 arch="amd64"
 {{ if eq .chezmoi.arch "arm64" }}
