@@ -6,6 +6,8 @@
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
 [[ -d "/opt/homebrew/bin" ]] && export PATH="/opt/homebrew/bin:$PATH"
+[[ -d "/nix/var/nix/profiles/default/bin" ]] && export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+[[ -d "$HOME/.nix-profile/bin" ]] && export PATH="$HOME/.nix-profile/bin:$PATH"
 {{- end }}
 
 # Check if NVM_DIR is already set, if not, set it to a default value
