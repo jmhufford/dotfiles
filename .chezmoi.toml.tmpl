@@ -16,7 +16,9 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 [data]
   codespaces = {{ $codespaces }}
   work = {{ $work }}
-{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+{{- if eq .chezmoi.os "darwin" }}
+    else = "TODO"
+{{- else if eq .chezmoi.osRelease.id "ubuntu" }}
   font = "Ubuntu Mono"
 {{- else }}
   font = "SauceCodePro Nerd Font Mono"
