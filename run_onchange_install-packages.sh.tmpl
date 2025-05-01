@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -eu
 
-{{ if eq .chezmoi.osRelease.idLike "debian" }}
+{{ if eq .chezmoi.os "darwin" }}
+
+brew install jq ejson ejson2env
+
+{{ else if eq .chezmoi.osRelease.idLike "debian" }}
 
 sudo apt update -qq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y -qq jq curl
@@ -40,10 +44,6 @@ download_and_install() {
 
 download_and_install shopify/ejson
 download_and_install shopify/ejson2env
-
-{{ else if eq .chezmoi.os "darwin" }}
-
-brew install jq ejson ejson2env
 
 {{ end }}
 
