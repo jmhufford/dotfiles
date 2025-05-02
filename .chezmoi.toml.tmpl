@@ -14,6 +14,11 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 {{- end }}
 
 {{- $chassisType := "desktop" }}
+{{- $cpuCores := 1 }}
+{{- $cpuThreads := 1 }}
+{{- if $codespaces }}
+{{- $chassisType = "container" }}
+{{- else }}
 {{- if eq .chezmoi.os "darwin" }}
 {{-   if contains "MacBook" (output "sysctl" "-n" "hw.model") }}
 {{-     $chassisType = "laptop" }}
@@ -37,6 +42,7 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 {{- else if eq .chezmoi.os "windows" }}
 {{-   $cpuCores = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfCores") | trim | atoi }}
 {{-   $cpuThreads = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfLogicalProcessors") | trim | atoi }}
+{{- end }}
 {{- end }}
 
 [data]
