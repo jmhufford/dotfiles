@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.os "darwin" }}
+#!/usr/bin/env bash
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app="https://kvm.xemplify.net/kvm/"
+{{- else if eq .chezmoi.os "linux" }}
+#!/usr/bin/env bash
+`which chromium 2>/dev/null || which chrome 2>/dev/null || which google-chrome` --app="https://kvm.xemplify.net/kvm/"
+{{- end }}
