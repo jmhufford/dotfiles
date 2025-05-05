@@ -16,6 +16,11 @@
 [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 {{- if .work }}
+if ps -p $$ | grep -q "bash"; then
+    eval "$(hm env interactive bash)"
+elif ps -p $$ | grep -q "zsh"; then
+    eval "$(hm env interactive zsh)"
+fi
 eval $(chezmoi dump-config | jq -r .ejson.key | ejson2env --key-from-stdin {{ .ejson }})
 {{- end  }}
 
