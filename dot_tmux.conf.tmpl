@@ -77,4 +77,8 @@ set -g status-right '#[fg=purple]#(cut -d " " -f 1-3 /proc/loadavg)#[default] #[
 # forget the find window.  That is for chumps
 bind-key -r f run-shell "tmux neww ~/bin/tmux-sessionizer"
 
-bind-key -r G run-shell "~/bin/tmux-sessionizer ~/.dotfiles"
+{{- if .work }}
+bind-key -r Q run-shell "~/bin/tmux-sessionizer ~/repos/HivemindPackagingTool"
+bind-key -r W run-shell "~/bin/tmux-sessionizer ~/repos/HivemindSDK"
+bind-key -r F run-shell "~/bin/tmux-sessionizer ~/repos/upstream"
+{{- end }}
