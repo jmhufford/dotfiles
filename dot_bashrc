@@ -155,8 +155,15 @@ GIT="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' "
 #-------------------------------------#
 
 #Primary
-PS1="\n $C7\u$P$C1@$P$C7\h$P \`${SELECT}\`$C6\`${GIT}\`$P \n $C2\w$P\n$C4-->$P " 
+PS1="\n $C3\u$P$C1@$P$C3\h$P \`${SELECT}\`$C6\`${GIT}\`$P \n $C2\w$P\n$C4-->$P " 
 
 # Secondary
 PS2="$C3--->$P "
+
+if type zoxide &> /dev/null
+then
+  eval "$(zoxide init bash)"
+  alias cd="z"
+fi
+
 

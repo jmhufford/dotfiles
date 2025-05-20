@@ -103,6 +103,12 @@ source $ZSH/oh-my-zsh.sh
 # Where should I put you?
 bindkey -s ^f "tmux-sessionizer\n"
 
+if type zoxide &> /dev/null
+then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
+
 ### RANDOM COLOR SCRIPT ###
 # Check if 'colorscript' exists, run it if available
 if command -v colorscript &> /dev/null; then
