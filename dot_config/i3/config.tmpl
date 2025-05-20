@@ -52,7 +52,11 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
+{{- if .work }}
+bindsym $mod+Return exec kitty
+{{- else }}
 bindsym $mod+Return exec alacritty
+{{- end }}
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -222,7 +226,7 @@ assign [class="Chromium-browser"] $ws5
 exec --no-startup-id sleep 3
 
 {{- if .work }}
-exec --no-startup-id i3-msg 'workspace 3; exec alacritty'
+exec --no-startup-id i3-msg 'workspace 3; exec kitty'
 exec google-chrome-stable
 {{- else }}
 
