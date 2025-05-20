@@ -12,7 +12,7 @@ then
             docker rm $1
         fi
         # run your container
-        docker run -itd -v $(pwd):$(pwd) -w $(pwd) --restart always --name $1 jome-workspace:latest
+        docker run -itd -v ~/.conan2:/home/jerome/.conan2 -v $(pwd):$(pwd) -w $(pwd) --restart always --name $1 jome-workspace:latest
     fi
     tmux send-keys -t $1:Docker "docker attach $1" C-m
 fi
