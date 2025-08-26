@@ -2,7 +2,7 @@
 {{- $secrets := ejsonDecrypt .ejson -}}
 {{- if .work }}
     name = Jerome Hufford
-    email = {{ quote $secrets.work_email_gov }}
+    email = {{ quote $secrets.work_email_corp }}
 {{- else }}
     name = Jerome
     email = {{ quote $secrets.email }}
