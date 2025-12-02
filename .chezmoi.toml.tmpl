@@ -9,7 +9,7 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 {{- if eq .chezmoi.hostname "nixos" }}  
 {{- $work = false -}}
-{{- if eq .chezmoi.hostname "nix-book" }}  
+{{ else if eq .chezmoi.hostname "nix-book" -}}  
 {{- $work = false -}}
 {{ else if eq .chezmoi.os "darwin" -}}
 {{- $work = false -}}
