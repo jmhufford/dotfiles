@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if [ "$#" -eq 1 ]; then
-  grep -HRniI --color $1
+  grep -HRniI --color --exclude-dir={node_modules,git,build} $1
 fi
 if [ "$#" -eq 2 ]; then
-  grep -HRniI --color $1 $2
+  grep -HRniI --color --exclude-dir={node_modules,git,build} $1 $2
 fi
