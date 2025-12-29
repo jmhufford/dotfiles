@@ -29,7 +29,13 @@
     editor = vim
 [push]
     default = simple
+[init]
+    defaultBranch = main
 {{- if .work }}
 [http "{{- $secrets.work_endpoint }}"]
     extraheader = AUTHORIZATION: Basic {{- $secrets.work_key }}
+[url "git@{{- $secrets.work_git_host }}:"]
+    insteadOf = https://{{- $secrets.work_git_host }}/
+[lfs]
+    locksverify = true
 {{- end }}
