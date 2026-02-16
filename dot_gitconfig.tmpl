@@ -1,12 +1,7 @@
-[user]
 {{- $secrets := ejsonDecrypt .ejson -}}
-{{- if .work }}
-    name = Jerome Hufford
-    email = {{ quote $secrets.work_email_corp }}
-{{- else }}
-    name = Jerome
+[user]
+    name = {{ $secrets.name }}
     email = {{ quote $secrets.email }}
-{{- end }}
 
 [alias]
     st = status

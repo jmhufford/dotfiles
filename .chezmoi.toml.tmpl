@@ -11,7 +11,7 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 {{- $work = false -}}
 {{ else if eq .chezmoi.hostname "nix-book" -}}  
 {{- $work = false -}}
-{{ else if eq .chezmoi.os "darwin" -}}
+{{ else if eq .chezmoi.hostname "jbook" -}}
 {{- $work = false -}}
 {{- end }}
 
@@ -58,7 +58,11 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 {{- else }}
   font = "SauceCodePro Nerd Font Mono"
 {{- end }}
-  ejson = {{ joinPath .chezmoi.sourceDir "chezmoi.ejson" | quote }}
+{{- if eq $work true }}
+  ejson = {{ joinPath .chezmoi.sourceDir "work.ejson" | quote }}
+{{- else }}
+  ejson = {{ joinPath .chezmoi.sourceDir "home.ejson" | quote }}
+{{- end }}
 
 [data.cpu]
   cores = {{ $cpuCores }}

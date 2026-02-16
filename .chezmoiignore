@@ -1,4 +1,4 @@
 README.md
-chezmoi.ejson
+*.ejson
 .oh-my-zsh/cache/
 install.sh

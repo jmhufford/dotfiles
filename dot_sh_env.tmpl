@@ -25,6 +25,6 @@ if ps -p $$ | grep -q "bash"; then
 elif ps -p $$ | grep -q "zsh"; then
     eval "$(hm env interactive zsh)"
 fi
-eval $(chezmoi dump-config | jq -r .ejson.key | ejson2env --key-from-stdin {{ .ejson }})
 {{- end  }}
+eval $(chezmoi dump-config | jq -r .ejson.key | ejson2env --key-from-stdin {{ .ejson }})
 
