@@ -2,6 +2,9 @@
 ## Full install, run from your home directory
 `EJSON_KEY=<key> sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply jmhufford`
 
+## Reconfigure
+`EJSON_KEY=$(chezmoi dump-config | jq -r .ejson.key) chezmoi init`
+
 ## Containers
 
 
