@@ -22,7 +22,13 @@ if [[ $# -eq 1 ]]; then
 else
     # If someone wants to make this extensible, i'll accept
     # PR
-    selected=$(find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(
+        {
+            find ~/repos -mindepth 1 -maxdepth 1 -type d
+            [[ -d "$HOME/.local/share/chezmoi" ]] && echo "$HOME/.local/share/chezmoi"
+            [[ -d "/etc/nixos" ]] && echo "/etc/nixos"
+        } | fzf
+    )
 fi
 
 if [[ -z $selected ]]; then
@@ -30,6 +36,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
+
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
