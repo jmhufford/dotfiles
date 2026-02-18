@@ -1,4 +1,14 @@
 {{- if .work -}}
+{{- $secrets := ejsonDecrypt .ejson -}}
+registry=https://{{ $secrets.work_art_host }}/artifactory/api/npm/devex-npm-mirror/
+@hm:registry=https://{{ $secrets.work_art_host }}/artifactory/api/npm/hmc-hmc-npm/
+@hmd:registry=https://{{ $secrets.work_art_host }}/artifactory/api/npm/hmd-js/
+@erd:registry=https://{{ $secrets.work_art_host }}/artifactory/api/npm/erd-erd-npm/
+//{{ $secrets.work_art_host }}/artifactory/api/npm/devex-npm-mirror/:_authToken={{- $secrets.art_ident_token }}
+//{{ $secrets.work_art_host }}/artifactory/api/npm/hmc-hmc-npm/:_authToken={{- $secrets.art_ident_token }}
+//{{ $secrets.work_art_host }}/artifactory/api/npm/hmd-js/:_authToken={{- $secrets.art_ident_token }}
+//{{ $secrets.work_art_host }}/artifactory/api/npm/erd-erd-npm/:_authToken={{- $secrets.art_ident_token }}
+strict-ssl=false
 {{- else if eq .chezmoi.os "darwin" -}}
 {{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "nixos") -}}
 prefix=/home/jerome/.npm-global
