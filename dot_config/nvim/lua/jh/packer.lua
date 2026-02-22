@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
 	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.2',
+		'nvim-telescope/telescope.nvim', tag = '0.2.1',
 		-- or                            , branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
@@ -18,7 +18,6 @@ return require('packer').startup(function(use)
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
 		end,}
-		use("nvim-treesitter/playground")
 		use("theprimeagen/harpoon")
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
