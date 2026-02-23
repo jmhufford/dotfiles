@@ -24,4 +24,5 @@ fi
 #     fi
 #     tmux send-keys -t $1:Docker "docker attach $1" C-m
 # fi
-nvim .
+tmux send-keys -t $1:NeoVim "nvim ." C-m
+tmux select-window -t $1:System
