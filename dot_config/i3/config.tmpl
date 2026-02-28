@@ -226,6 +226,18 @@ assign [class="google-chrome"] $ws4
 assign [class="Google-chrome"] $ws4
 assign [class="Chromium-browser"] $ws5
 
+# Discord (Electron apps vary in case; make it case-insensitive)
+assign [class="(?i)^discord$"] $ws7
+
+# Steam (Steam spawns multiple window classes; catch them all)
+assign [class="^Steam$"] $ws6
+assign [class="^steam_app_.*$"] $ws6
+assign [class="^steam$"] $ws6
+
+# Optional: keep transient Steam/Discord dialogs together
+for_window [class="^Steam$"] move to workspace $ws6
+for_window [class="(?i)^discord$"] move to workspace $ws7
+
 # slight delay upfront for xrandr to configure monitors
 exec --no-startup-id sleep 3
 
@@ -233,14 +245,11 @@ exec --no-startup-id sleep 3
 exec --no-startup-id i3-msg 'workspace 3; exec kitty'
 exec google-chrome-stable
 {{- else }}
-
-exec kvm
 exec --no-startup-id i3-msg 'workspace 6; move workspace to output HDMI-0; exec sleep .1'
 exec --no-startup-id i3-msg 'workspace 1; move workspace to output DP-0; exec sleep .1'
 exec --no-startup-id i3-msg 'workspace 2; exec alacritty'
-exec --no-startup-id i3-msg 'workspace 3; exec alacritty -e ssh -q -D 1080 sai.xemplify.net'
-exec google-chrome-stable --proxy-server="socks5://localhost:1080"
-
 exec --no-startup-id i3-msg 'workspace 1; exec librewolf'
-{{- end }}
 
+# Autostart, time/day aware
+exec --no-startup-id ~/.config/i3/autostart.sh
+{{- end }}
