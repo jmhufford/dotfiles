@@ -61,10 +61,18 @@ ecosystem {
 bind = $mod, Return, exec, $terminal
 bind = $mod, D, exec, $menu
 bind = $mod SHIFT, Q, killactive
-bind = $mod SHIFT, E, exit
+bind = $mod SHIFT, E, exec, sh -c 'hyprctl notify 1 6000 "rgb(ffcc00)" "exit mode: [L] logout  [R] reboot  [S] shutdown  [Esc/Enter] cancel"; hyprctl dispatch submap exit'
 bind = $mod, F, fullscreen, 1
 bind = $mod SHIFT, space, togglefloating
 bind = $mod, P, pseudo
+
+submap = exit
+bind = , l, exec, sh -c 'hyprctl dispatch submap reset; hyprctl dispatch exit'
+bind = , r, exec, sh -c 'hyprctl dispatch submap reset; reboot'
+bind = , s, exec, sh -c 'hyprctl dispatch submap reset; shutdown now'
+bind = , escape, submap, reset
+bind = , return, submap, reset
+submap = reset
 
 # i3-style directional focus with hjkl.
 bind = $mod, H, movefocus, l
