@@ -1,5 +1,13 @@
 # i3-like starter config for Hyprland.
+{{- if eq .chezmoi.hostname "nixos" }}
+# Hyprland uses wlroots output names (for example DP-1, HDMI-A-1), not Xorg-style DP-0/HDMI-0.
+# Keep this stable across reboots by explicitly placing likely outputs and allowing fallback auto config.
+monitor=DP-1,preferred,0x0,1
+monitor=HDMI-A-1,preferred,2560x180,1
 monitor=,preferred,auto,1
+{{- else }}
+monitor=,preferred,auto,1
+{{- end }}
 
 $mod = SUPER
 $terminal = alacritty
@@ -43,6 +51,11 @@ dwindle {
 
 misc {
   disable_hyprland_logo = true
+}
+
+ecosystem {
+  no_update_news = true
+  no_donation_nag = true
 }
 
 bind = $mod, Return, exec, $terminal
