@@ -1,7 +1,53 @@
 #!/usr/bin/env bash
+set -eu
+
+exclude_dirs=(
+  .git
+  node_modules
+  venv
+  .venv
+  build
+  dist
+  target
+  __pycache__
+  .pytest_cache
+  .mypy_cache
+  .tox
+)
+
 if [ "$#" -eq 1 ]; then
-  grep -HRniI --color --exclude-dir={node_modules,git,build} $1
+  pattern="$1"
+  path="."
+elif [ "$#" -eq 2 ]; then
+  pattern="$1"
+  path="$2"
+else
+  echo "Usage: askjeeves <pattern> [path]" >&2
+  exit 1
 fi
-if [ "$#" -eq 2 ]; then
-  grep -HRniI --color --exclude-dir={node_modules,git,build} $1 $2
+
+if command -v rg >/dev/null 2>&1; then
+  rg_flags=(
+    --line-number
+    --with-filename
+    --ignore-case
+    --color=always
+    --hidden
+    --no-ignore
+    --follow
+  )
+
+  for dir in "${exclude_dirs[@]}"; do
+    rg_flags+=(--glob "!${dir}/**")
+  done
+
+  rg "${rg_flags[@]}" -- "$pattern" "$path"
+else
+  grep_flags=(-HRniI --color)
+  for dir in "${exclude_dirs[@]}"; do
+    grep_flags+=(--exclude-dir="$dir")
+  done
+
+  # C locale can make grep noticeably faster on large trees.
+  LC_ALL=C grep "${grep_flags[@]}" -- "$pattern" "$path"
 fi
