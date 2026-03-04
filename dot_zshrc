@@ -109,11 +109,13 @@ then
   alias cd="z"
 fi
 
-### RANDOM COLOR SCRIPT ###
-# Check if 'colorscript' exists, run it if available
-if command -v colorscript &> /dev/null; then
-  colorscript random
-# If 'colorscript' doesn't exist, check for 'fast fetch' and run it if available
-elif command -v fastfetch &> /dev/null; then
+# If inside nix shell, prepend a tag
+if [[ -n "$IN_NIX_SHELL" ]]; then
+  # Optional: use shell name if provided
+  local nix_name="${name:-nix-shell}"
+  PROMPT="(nix:${nix_name})$PROMPT"
+fi
+
+if command -v fastfetch &> /dev/null; then
   fastfetch
 fi
