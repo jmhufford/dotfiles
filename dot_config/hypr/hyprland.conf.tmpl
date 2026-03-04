@@ -16,6 +16,7 @@ $menu = rofi -show drun
 exec-once = waybar
 exec-once = dunst
 exec-once = nm-applet --indicator
+exec-once = ~/.config/hypr/autostart.sh
 
 input {
   kb_layout = us
@@ -112,3 +113,15 @@ bind = $mod SHIFT, 0, movetoworkspace, 10
 # Mouse drag with modifier, similar to i3 floating move/resize ergonomics.
 bindm = $mod, mouse:272, movewindow
 bindm = $mod, mouse:273, resizewindow
+
+# Keep app placement consistent with i3 workspace assignments.
+windowrulev2 = workspace 1, class:^(Navigator)$
+windowrulev2 = workspace 1, class:^(librewolf)$
+windowrulev2 = workspace 4, class:^(google-chrome)$
+windowrulev2 = workspace 4, class:^(Google-chrome)$
+windowrulev2 = workspace 5, class:^(Chromium-browser)$
+windowrulev2 = workspace 6, class:^(steam)$
+windowrulev2 = workspace 6, class:^(Steam)$
+windowrulev2 = workspace 6, class:^(steam_app_.*)$
+windowrulev2 = workspace 7, class:^(discord)$
+windowrulev2 = workspace 7, class:^(Discord)$
