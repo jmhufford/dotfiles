@@ -28,7 +28,7 @@
     defaultBranch = main
 {{- if .work }}
 [http "{{- $secrets.work_endpoint }}"]
-    extraheader = AUTHORIZATION: Basic {{- $secrets.work_key }}
+    extraheader = AUTHORIZATION: Basic {{ $secrets.work_key }}
 [url "git@{{- $secrets.work_git_host }}:"]
     insteadOf = https://{{- $secrets.work_git_host }}/
 [lfs]
@@ -36,4 +36,3 @@
 {{- end }}
 [pull]
     rebase = true
-
