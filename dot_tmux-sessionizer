@@ -8,7 +8,7 @@ tmux new-window -n 'System'
 if type codex &> /dev/null
 then
     tmux new-window -n 'Codex'
-    tmux send-keys -t $1:Codex "codex" C-m
+    tmux send-keys -t $1:Codex "codex resume || codex" C-m
 fi
 
 # if type docker &> /dev/null
