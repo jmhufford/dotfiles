@@ -75,6 +75,10 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Keep completion caches in XDG cache and skip compfix's directory audit on startup.
+export ZSH_DISABLE_COMPFIX="true"
+export ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/.zcompdump-${HOST%%.*}-${ZSH_VERSION}"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
