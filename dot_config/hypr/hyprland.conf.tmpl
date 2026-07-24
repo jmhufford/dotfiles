@@ -47,12 +47,13 @@ animations {
 }
 
 dwindle {
-  pseudotile = true
   preserve_split = true
 }
 
 misc {
   disable_hyprland_logo = true
+  disable_splash_rendering = true
+  force_default_wallpaper = 0
 }
 
 ecosystem {
@@ -120,13 +121,13 @@ bindm = $mod, mouse:272, movewindow
 bindm = $mod, mouse:273, resizewindow
 
 # Keep app placement consistent with i3 workspace assignments.
-windowrulev2 = workspace 1, class:^(Navigator)$
-windowrulev2 = workspace 1, class:^(librewolf)$
-windowrulev2 = workspace 4, class:^(google-chrome)$
-windowrulev2 = workspace 4, class:^(Google-chrome)$
-windowrulev2 = workspace 5, class:^(Chromium-browser)$
-windowrulev2 = workspace 6, class:^(steam)$
-windowrulev2 = workspace 6, class:^(Steam)$
-windowrulev2 = workspace 6, class:^(steam_app_.*)$
-windowrulev2 = workspace 7, class:^(discord)$
-windowrulev2 = workspace 7, class:^(Discord)$
+windowrule = workspace 1, match:class ^(Navigator)$
+windowrule = workspace 1, match:class ^(librewolf)$
+windowrule = workspace 4, match:class ^(google-chrome)$
+windowrule = workspace 4, match:class ^(Google-chrome)$
+windowrule = workspace 5, match:class ^(Chromium-browser)$
+windowrule = workspace 6, match:class ^(steam)$
+windowrule = workspace 6, match:class ^(Steam)$
+windowrule = workspace 6, match:class ^(steam_app_.*)$
+windowrule = workspace 7, match:class ^(discord)$
+windowrule = workspace 7, match:class ^(Discord)$
