@@ -120,6 +120,10 @@ if [[ -n "$IN_NIX_SHELL" ]]; then
   PROMPT="(nix:${nix_name})$PROMPT"
 fi
 
-if command -v fastfetch &> /dev/null; then
-  fastfetch
+if [[ -o interactive && -t 1 ]] && command -v fastfetch &> /dev/null; then
+  if command -v timeout &> /dev/null; then
+    timeout 0.5s fastfetch || true
+  else
+    fastfetch
+  fi
 fi
