@@ -1,4 +1,5 @@
 README.md
+AGENTS.md
 *.ejson
 .oh-my-zsh/cache/
 install.sh
